@@ -1,6 +1,8 @@
-type Contract = {
+type AppEvent = {
+  id: string;
   name: string;
-  owner: string;
-  amount: string;
-  status: "progress" | "complete";
+  startDate: string;
+  endDate: string;
+  city: string;
+  location: string;
 };

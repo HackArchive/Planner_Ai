@@ -13,25 +13,18 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "My Contracts",
-      href: "/dashboard/lister",
+      title: "My Events",
+      href: "/dashboard/",
       icon: "users",
     },
     {
-      title: "Add Contract",
-      href: "/contract/add",
+      title: "Add Event",
+      href: "/dashboard/add",
       icon: "package",
     },
-  ],
-  sidebarNavBidder: [
     {
-      title: "My Bids",
-      href: "/dashboard/bidder",
-      icon: "users",
-    },
-    {
-      title: "All Bids",
-      href: "/bid/all",
+      title: "AI Event",
+      href: "/dashboard/ai",
       icon: "package",
     },
   ],
