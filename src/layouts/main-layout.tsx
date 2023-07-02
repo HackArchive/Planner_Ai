@@ -8,19 +8,25 @@ import { buttonVariants } from "@/components/ui/button";
 import { MainNav } from "@/components/main-nav";
 import { SiteFooter } from "@/components/site-footer";
 
+import { signIn, signOut, useSession } from "next-auth/react";
+
 interface MainLayoutProps {
   children: React.ReactNode;
 }
 
 const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
+  const session = useSession();
   // const { wallet, isSignedIn } = useContext(WalletContext)!;
 
   const handleLogin = async () => {
-    // wallet.signIn();
+    // signIn()
   };
 
   const handleLogout = async () => {
-    // wallet.signOut();
+    await signOut({
+      redirect: true,
+      callbackUrl: "/",
+    });
   };
 
   return (
@@ -35,9 +41,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
                 buttonVariants({ variant: "secondary", size: "sm" }),
                 "px-4"
               )}
-              onClick={isSignedIn ? handleLogout : handleLogin}
+              disabled={session.status === "loading"}
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={
+                session.status === "authenticated" ? handleLogout : handleLogin
+              }
             >
-              {isSignedIn ? `Logout ${wallet.accountId}` : "Login"}
+              {session.status === "authenticated" ? `Logout` : "Login"}
             </Button>
           </nav>
         </div>
