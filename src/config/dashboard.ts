@@ -19,7 +19,7 @@ export const dashboardConfig: DashboardConfig = {
     },
     {
       title: "Add Event",
-      href: "/dashboard/add",
+      href: "/dashboard/new",
       icon: "package",
     },
     {

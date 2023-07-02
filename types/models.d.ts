@@ -5,4 +5,6 @@ type AppEvent = {
   endDate: string;
   city: string;
   location: string;
+  description: string;
+  type: "virtual" | "physical" | "hybrid";
 };
