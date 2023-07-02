@@ -21,12 +21,20 @@ import { toast } from "@/components/ui/use-toast";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "~/components/ui/form";
 import { Textarea } from "~/components/ui/textarea";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type NewEventFormProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -64,7 +72,7 @@ export function NewEventForm({ className, ...props }: NewEventFormProps) {
       setLoading(true);
 
       // TODO: Add Logic
-      console.log("NEW CONTRACT:", values);
+      console.log("NEW EVENT:", values);
     } catch (err: unknown) {
       const error = err;
 
@@ -77,10 +85,6 @@ export function NewEventForm({ className, ...props }: NewEventFormProps) {
       setLoading(false);
     }
   }
-
-  React.useEffect(() => {
-    return () => {};
-  }, []);
 
   return (
     <div className={cn("grid gap-6 px-2", className)} {...props}>
@@ -103,12 +107,16 @@ export function NewEventForm({ className, ...props }: NewEventFormProps) {
 
             <FormField
               control={form.control}
-              name="city"
+              name="description"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Total Amount</FormLabel>
+                <FormItem className="col-span-2">
+                  <FormLabel>Description</FormLabel>
                   <FormControl>
-                    <Input placeholder="$1000" {...field} />
+                    <Textarea
+                      placeholder="Enter as much details as possible"
+                      rows={5}
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -202,16 +210,12 @@ export function NewEventForm({ className, ...props }: NewEventFormProps) {
 
             <FormField
               control={form.control}
-              name="description"
+              name="city"
               render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>Description</FormLabel>
+                <FormItem>
+                  <FormLabel>City</FormLabel>
                   <FormControl>
-                    <Textarea
-                      placeholder="Enter as much details as possible"
-                      rows={5}
-                      {...field}
-                    />
+                    <Input placeholder="Mumbai" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -220,19 +224,40 @@ export function NewEventForm({ className, ...props }: NewEventFormProps) {
 
             <FormField
               control={form.control}
-              name="files"
+              name="location"
               render={({ field }) => (
-                <FormItem className="col-span-2">
-                  <FormLabel>File(s)</FormLabel>
+                <FormItem>
+                  <FormLabel>Location</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Select Images or PDFs"
-                      type="file"
-                      accept="image/*, application/pdf"
-                      multiple
-                      {...field}
-                    />
+                    <Input placeholder="Taj Hotel, Colaba" {...field} />
                   </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="type"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Email</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select event type" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="virtual">Virtual</SelectItem>
+                      <SelectItem value="physical">Physical</SelectItem>
+                      <SelectItem value="hybrid">Hybrid</SelectItem>
+                    </SelectContent>
+                  </Select>
+
                   <FormMessage />
                 </FormItem>
               )}
